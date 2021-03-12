@@ -4,22 +4,22 @@ import SecaoListarMensagens from "./SecaoListarMensagens";
 
 // Componentes de estilização **********************************
 const Respostas = styled.div `
-    height: 100%;
+    height: 96%;
     width: 100%;
     top: 0;
     left: 0;
     position: absolute;
     display: flex;
     flex-flow: column nowrap;
-    flex-direction:column;
-    overflow-y: auto;
+    justify-content: flex-end;
+    overflow: auto;
 `
 
 const DivContainer = styled.div`
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
-  position: relative;
+  position: absolute;
   bottom: 0;
 `;
 const InputUsuario = styled.input`
