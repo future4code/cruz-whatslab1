@@ -12,8 +12,6 @@ const DivContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  justify-content: flex-end;
-  overflow: scroll;
 `;
 
 function App() {

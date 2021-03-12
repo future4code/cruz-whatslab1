@@ -2,7 +2,6 @@ import styled from "styled-components"
 import {Component} from "react"
 
 const Mensagem = styled.p `
-    
     padding: 10px;
     position: relative;
     bottom: 0;
