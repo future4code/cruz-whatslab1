@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SecaoListarMensagens from "./SecaoListarMensagens";
 
 // Componentes de estilização **********************************
-const Respostas = styled.div `
+const Respostas = styled.div`
     height: 96%;
     width: 100%;
     top: 0;
@@ -11,8 +11,9 @@ const Respostas = styled.div `
     position: absolute;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: flex-end;
-    overflow: auto;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-bottom: 10px;
 `
 
 const DivContainer = styled.div`
@@ -41,6 +42,7 @@ const ButtonEnviar = styled.button`
 class SecaoEnviarMensagens extends Component {
   state = {
     mensagens: [],
+    id: 0,
     nomeUsuario: "",
     mensagemUsuario: "",
   };
@@ -53,30 +55,65 @@ class SecaoEnviarMensagens extends Component {
   };
 
   enviarMensagem = () => {
+    const div = document.getElementById('main-scroll');
+    div.scrollTop = div.scrollHeight;
+    console.log("Edu")
+    
+    if (this.state.mensagemUsuario === "") {
+      alert("Digite uma mensagem!")
+      return false;
+    }
+    if (this.state.nomeUsuario === "") {
+      alert("Digite seu usuário!")
+      return false;
+    }
     const novaMensagem = {
-      nomeUsuario: this.state.nomeUsuario,
+      id: this.state.mensagens.length + 1,
+      nomeUsuario: this.state.nomeUsuario.toLowerCase(),
       mensagemUsuario: this.state.mensagemUsuario,
     };
 
     this.setState({
       mensagens: [...this.state.mensagens, novaMensagem],
+      mensagemUsuario: "",
     });
   };
+
+  enviarMensagemKey = (event) => {
+    //console.log(event.key);
+    if (event.keyCode === 13) {
+      this.enviarMensagem();
+    }
+  }
+
+  deleteMensagem = (id) => {
+    const novaLista = this.state.mensagens.filter((item) => {
+      return item.id !== id;
+    })
+
+    if (window.confirm('Deseja realmente deletar está mensagem?')) {
+      this.setState({
+        mensagens: novaLista
+      });
+    }
+  }
 
   render() {
     const listaDeMensagens = this.state.mensagens.map((msg, index) => {
       return (
         <SecaoListarMensagens
+          id={msg.id}
           key={index}
           nomeUsuario={msg.nomeUsuario}
           mensagemUsuario={msg.mensagemUsuario}
+          deletar={this.deleteMensagem}
         />
       );
     });
 
     return (
       <div>
-        <Respostas>{listaDeMensagens}</Respostas>
+        <Respostas id="main-scroll">{listaDeMensagens}</Respostas>
         <DivContainer>
           <InputUsuario
             placeholder="Usuário"
@@ -84,6 +121,7 @@ class SecaoEnviarMensagens extends Component {
             value={this.state.nomeUsuario}
           />
           <InputMensagem
+            onKeyDown={this.enviarMensagemKey}
             placeholder="Mensagem"
             onChange={this.handleMensagem}
             value={this.state.mensagemUsuario}

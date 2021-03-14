@@ -8,13 +8,12 @@ const DivContainer = styled.div`
   width: 600px;
   height: 90vh;
   border: 1px solid black;
-  flex: 1 1 0%;
-  display: flex;
-  flex-direction: column;
   position: relative;
+  overflow-y: auto;
 `;
 
 function App() {
+  
   return (
     <DivContainer>
       <SecaoEnviarMensagens />
