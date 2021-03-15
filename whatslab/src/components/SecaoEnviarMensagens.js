@@ -13,27 +13,37 @@ const Respostas = styled.div`
     flex-flow: column nowrap;
     overflow-y: auto;
     box-sizing: border-box;
-    padding-bottom: 10px;
+    padding-bottom: 39px;
 `
 
 const DivContainer = styled.div`
+  height: 60px;
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
   position: absolute;
   bottom: 0;
+  background-color: #f3f3f3;
+  align-items: center;
+  justify-content: center;
 `;
 const InputUsuario = styled.input`
+  border: 1px solid #ddd;
+  height: 14px;
   width: 20%;
   padding: 10px;
 `;
 
 const InputMensagem = styled.input`
-  width: 60%;
+  border: 1px solid #ddd;
+  height: 14px;
+  width: 50%;
   padding: 10px;
 `;
 
 const ButtonEnviar = styled.button`
+  border: 1px solid #ddd;
+  height: 36px;
   width: 20%;
   padding: 10px;
 `;
@@ -57,8 +67,7 @@ class SecaoEnviarMensagens extends Component {
   enviarMensagem = () => {
     const div = document.getElementById('main-scroll');
     div.scrollTop = div.scrollHeight;
-    console.log("Edu")
-    
+
     if (this.state.mensagemUsuario === "") {
       alert("Digite uma mensagem!")
       return false;
@@ -80,7 +89,6 @@ class SecaoEnviarMensagens extends Component {
   };
 
   enviarMensagemKey = (event) => {
-    //console.log(event.key);
     if (event.keyCode === 13) {
       this.enviarMensagem();
     }
