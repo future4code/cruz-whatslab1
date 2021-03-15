@@ -8,17 +8,32 @@ const Mensagem = styled.div`
     margin: 0 10px 10px 10px;
     width: fit-content;
     max-width: 400px;
-    border: 1px solid #b7b7b7;
     cursor: pointer;
+    background-color: #fff;
+    -webkit-border-radius: 6px; 
+    -moz-border-radius: 6px; 
+    border-radius: 6px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 3px 3px 0px;
+    font-size: 0.9em;
+    word-wrap: break-word;
     &:first-of-type {
         margin-top: auto;
     }
     &.right {
+        background-color: rgb(221, 247, 200);
         align-self: flex-end;
     }
+    & span {
+        font-weight: bold;
+        color: #1AD1E6;
+    }
 `
-const MensagemContent = styled.span`
-    
+const MensagemContent = styled.p`
+    margin: 0;
+    margin-top: 6px;
+    &.rightP {
+        margin: 0;
+    }
 `
 
 class SecaoListarMensagens extends Component {
@@ -27,12 +42,12 @@ class SecaoListarMensagens extends Component {
         if (this.props.nomeUsuario === "eu") {
             return (
                 <Mensagem onDoubleClick={() => this.props.deletar(this.props.id)} className="right">
-                    <MensagemContent>{this.props.mensagemUsuario}</MensagemContent>
+                    <MensagemContent className="rightP">{this.props.mensagemUsuario}</MensagemContent>
                 </Mensagem>)
         } else {
             return (
                 <Mensagem onDoubleClick={() => this.props.deletar(this.props.id)}>
-                    {this.props.nomeUsuario} {this.props.id}: <MensagemContent>{this.props.mensagemUsuario}</MensagemContent>
+                    <span>{this.props.nomeUsuario}:</span><MensagemContent>{this.props.mensagemUsuario}</MensagemContent>
                 </Mensagem>)
         }
     }
